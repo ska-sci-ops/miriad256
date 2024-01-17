@@ -1,0 +1,58 @@
+%D A list of Miriad tasks
+%: miscellaneous
+%B
+	Available Miriad tasks are given below.
+	Type
+	  help <taskname>
+	to get extra help.
+
+
+	Other help topics available are
+
+addhis	    antconv	antpol	    arrayplt	arrfix	    atfix
+atlod	    atmerge	atmos	    atrecal	atrtfix	    atscfix
+atsum	    attsys	atwvr	    atxy	avmaths	    bbcal
+blcal	    blflag	boxspec	    calc	calplot	    calred
+cclean	    cgcurs	cgdisp	    cginit	cgrego	    cgslice
+cgspec	    changes	cheat	    clean	clfind	    closure
+clplot	    clstats	colden	    confighist	conterr	    contsen
+contsub	    convol	copyhd	    cotra	csdi	    delhd
+demos	    deproject	detab	    device	doc	    doc2man
+docfmt	    early	ellint	    ellplt	ercmd	    fakeotf
+fft	    fgflag	fits	    flint	gaufit	    gethd
+gpaver	    gpboot	gpbreak	    gpcal	gpcomb	    gpcopy
+gpdof	    gpedit	gperror	    gplist	gpnorm	    gpplt
+gpscal	    gpshift	hanning	    help	hermes	    histo
+im2uv	    imbin	imblr	    imcat	imcfn	    imcmp
+imcomb	    imdiff	imfit	    imframe	imgen	    imheq
+imhist	    imhol	imlist	    imload	immask	    immerge
+imom	    impol	impoly	    impos	imrm	    imsad
+imsharp	    imspec	imspect	    imstat	imstore	    imsub
+imtab	    in		intf2c	    invert	itemize	    lagflg
+line	    linmos	mathd	    maths	maxen	    maxfit
+mbspect	    mfboot	mfcal	    mfclean	mfflat	    mfplan
+mfspin	    minmax	mirbug	    mirhelp	miriad	    mirmax
+mirversion  moment	mopfix	    moscsdi	mosgen	    moslst
+mosmem	    mospsf	mossdi	    mossen	mostess	    motd
+obsrms	    odnh3	offaxis	    offpol	offset	    oldflux
+opplt	    options	out	    paraplot	pbplot	    pcsub
+pgflag	    planets	plboot	    plgeom	plplt	    pmosmem
+pops	    ppmtomir	prthd	    prthis	psrbl	    psrfix
+psrplt	    puthd	qvack	    ratty	region	    regrid
+reorder	    restor	rmclean	    rpfread	rpgen	    select
+selfcal	    server	sfind	    shifty	sigest	    smooth
+specshift   stokes	tasks	    telepar	telescop    tmcal
+tmcvt	    tmgen	tpcp	    tpgains	tract	    transfix
+trim	    tvall	tvclip	    tvcycle	tvdisp	    tvflag
+tvinit	    tvset	uv2ms	    uvacflag	uvaflag	    uvamp
+uvaver	    uvcat	uvclip	    uvdflag	uvdiff	    uvdump
+uvedit	    uvfft	uvfit	    uvflag	uvflux	    uvfmeas
+uvfstats    uvgains	uvgen	    uvglue	uvimage	    uvindex
+uvlin	    uvlist	uvmodel	    uvpflag	uvpit	    uvplanet
+uvplt	    uvputhd	uvratio	    uvredo	uvrms	    uvrot
+uvsector    uvsfit	uvspec	    uvsplit	uvstat	    uvsub
+uvswap	    uvtcor	uvtplt	    uvwide	uvzflag	    varlist
+varmerge    varplt	varsizes    vblank	velcolor    velfit
+velimage    velmodel	velplot	    velsw	vis	    wblod
+wbplt	    weatherdata window	    xmtv	xyphase	    zapchan
+zeeeta	    zeefake	zeemap	    zeesim	zeestat

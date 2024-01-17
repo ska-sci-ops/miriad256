@@ -1,0 +1,29 @@
+%D Miriad tasks and keyword summary
+%: miscellaneous
+%B
+Creation date: Wed 17 Jan 2024 09:56:12 AWST
+
+Task name conventions:
+
+	im* .... operates on xyv images.
+	uv* .... operates on uv datasets.
+	tv* .... uses a TV device.
+	gp* .... gain/polarisation calibration task (antenna based).
+	cg* .... PGPLOT-based image display tasks.
+	zee* ... application programs often with application symbol.
+	or use common name (eg, clean).
+
+Keyword conventions:
+
+	device ..... PGPLOT device.
+	server ..... TV server/device.
+	in ......... input image dataset.
+	out ........ output dataset.
+	vis ........ uv dataset.
+	dataset .... calibration dataset.
+	region ..... image region-of-interest.
+	select ..... uv data selection.
+	line ....... uv linetype.
+	map/beam ... xy image.
+
+	  ----------------------------------------------
