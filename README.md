@@ -2,36 +2,30 @@
 
 A copy of Miriad with support for 256 antennas (with modifications from M. Waterson/R. Wayth/R. Subrahmanyan).
 
-#### Installation notes for Ubuntu 22.04
 
-We copied this source code to `/usr/local/miriad`, then ran
+### Installation (Mac)
 
-```
-./configure --with-wcslib=/usr/lib/x86_64-linux-gnu --prefix=/usr/local/miriad
-make
-```
-
-The install needs `gfortran` and `readline`, but when running miriad it demands
-older versions of `libgfortran` and `libreadline`, which we copied over from 
-micromamba:
-
-```bash
-micromamba create -n aavs
-micromamba install libgfortran4
-cp ~/micromamba/envs/aavs/lib/libgfortran.so* /usr/local/miriad/linux64/lib/
-
-micromamba install readline=7.0
-cp ~/micromamba/envs/aavs/lib/libreadline* /usr/local/miriad/linux64/lib/
-```
-
-To make sure these are found, we then added two lines to the end of `MIRRC.sh`:
+Use homebrew to install fortran, compile tools, and the PGPLOT replacement `giza`:
 
 ```
- export LD_LIBRARY_PATH=$MIRLIB:$LD_LIBRARY_PATH
- export PATH=$MIRBIN:$PATH
+brew install pkgconfig cmake gfortran gcc-13 giza
 ```
 
-(Note: these lines may disappear after running `make`, as it updates `MIRRC.sh`, so may need to be re-added). 
+Note the homebrew version of `wcslib` does not have fortran support.
+But we can get this from python/conda:
+
+```
+conda install cfitsio readline wcslib meson
+```
+
+You'll then need to set some environment variables:
+
+```
+export CC=gcc-13
+export CONDA_ENV_PATH=/Users/daniel.price/local/mamba/envs/aa3
+export LIBRARY_PATH=$MAMBA_ENV_PATH/lib 
+```
+
 
 #### 256 antenna support
 
