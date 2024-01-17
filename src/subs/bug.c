@@ -163,8 +163,8 @@ char *errmsg_c(int n)
 #else
   static char string[128];
 # if !defined(linux) && !defined(linux64) && !defined(darwin_ppc) && !defined(darwin_x86) && !defined(darwin_x86_64)
-  extern int sys_nerr;
-  extern char *sys_errlist[];
+  extern __const int sys_nerr;
+  extern __const char *__const sys_errlist[];
 # endif
   if (n > 0 && n <= sys_nerr) {
     return (char *)sys_errlist[n];
