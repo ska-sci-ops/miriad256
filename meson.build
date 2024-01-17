@@ -15,7 +15,7 @@ comp_flags = ['-g', '-O', '-std=legacy',
 add_project_arguments(comp_flags, language : ['fortran'])
 
 # C compile
-add_project_arguments(['-std=c99', '-Wno-deprecated-non-prototype'], language : ['c'])
+#add_project_arguments(['-std=c99'], language : ['c'])
 
 # Generate filelists
 fs = import('fs')
