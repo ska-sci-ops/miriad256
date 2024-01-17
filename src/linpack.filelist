@@ -1,4 +1,3 @@
-GNUmakefile
 caxpy.for
 cchdc.for
 cchdd.for
