@@ -1,0 +1,4 @@
+.DS_Store
+subprojects/rpfits/darwin/
+subprojects/rpfits/linux64/
+subprojects/rpfits/build/
