@@ -9,7 +9,7 @@ foreach filename : srclist
         tgt = custom_target(progname, 
                     input : filename, 
                     output : filename.replace('.for', '.f'),
-                    command : [ratty_exe, '-s', 'linux', '-I', '../inc', '-I', '@OUTDIR@', '@INPUT@', '@OUTPUT@']
+                    command : [ratty_exe, '-s', 'linux', '-I', '../inc', '-I', '@OUTDIR@', '@INPUT@', '@OUTPUT@'],
                     )
     srclist_linpack += tgt
     endif

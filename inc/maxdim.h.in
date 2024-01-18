@@ -26,7 +26,7 @@ C     power of 2 below the limit.
 
 C     Maximum number of antennas (ATA=64).
       INTEGER   MAXANT
-      PARAMETER(MAXANT = 64)
+      PARAMETER(MAXANT = @MAXANT@)
 
 C     Maximum number of baselines, including autocorrelations.
       INTEGER   MAXBASE
@@ -34,15 +34,15 @@ C     Maximum number of baselines, including autocorrelations.
 
 C     Maximum number of channels in spectral data.
       INTEGER   MAXCHAN
-      PARAMETER(MAXCHAN = 70000)
+      PARAMETER(MAXCHAN = @MAXCHAN@)
 
 C     Maximum number of windows in visibility data.
       INTEGER   MAXWIN
-      PARAMETER(MAXWIN = 48)
+      PARAMETER(MAXWIN = @MAXWIN@)
 
 C     Maximum number of wideband channels.
       INTEGER   MAXWIDE
-      PARAMETER(MAXWIDE = 18)
+      PARAMETER(MAXWIDE = @MAXWIDE@)
 
 C     Maximum number of frequency bins in gains table
       INTEGER   MAXFBIN

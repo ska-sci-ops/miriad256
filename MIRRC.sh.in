@@ -7,7 +7,7 @@
 # $Id: MIRRC.sh.in,v 1.8 2012/04/17 05:28:49 wie017 Exp $
 #-----------------------------------------------------------------------------
 # Miriad root directory set by configure or otherwise.
-  MIR=/usr/local/miriad ; export MIR
+  MIR=@PREFIX@; export MIR
 
 # Important Miriad subdirectories.
   MIRCAT=$MIR/cat  ; export MIRCAT
@@ -60,7 +60,3 @@
     fi
     export DYLD_FALLBACK_LIBRARY_PATH
   fi
- 
- # DCP: Add to path
- export LD_LIBRARY_PATH=$MIRLIB:$LD_LIBRARY_PATH
- export PATH=$MIRBIN:$PATH

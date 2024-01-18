@@ -7,7 +7,7 @@
 # $Id: MIRRC.in,v 1.7 2012/04/17 05:28:49 wie017 Exp $
 #-----------------------------------------------------------------------------
 # Miriad root directory set by configure or otherwise.
-  setenv MIR /usr/local/miriad
+  setenv MIR /Users/daniel.price/Data/miriad
 
 # Important Miriad subdirectories.
   setenv MIRCAT  $MIR/cat

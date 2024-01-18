@@ -1,18 +1,21 @@
 # MIRIAD: meson build script 
 # Project ID and versioning
-project('miriad', 'c', 'fortran', version: '2023.03.16')
+project('miriad', 'c', 'fortran', version: '2024.01.18')
 project_name = 'miriad'
-version    = '2023.03.16'
+version    = '2024.01.18'
 so_version = '0'
 
 # Compile-time configuration
 conf_data = configuration_data({
-    'MAXANT': '512',          # Maximum number of antennas in array
-    'MAXCHAN': '70000',       # Maximum number of channels
-    'MAXAVER': '100000000',   # Maximum UV averaging
-    'MAXWIN': '48',           # Maximum number of windows in uv data
-    'MAXWIDE': '18'           # Maximum number of wideband channels
+    'MAXANT': 256,          # Maximum number of antennas in array
+    'MAXCHAN': 4096,        # Maximum number of channels
+    'MAXAVER': 20000000,    # Maximum UV averaging
+    'MAXWIN': 48,           # Maximum number of windows in uv data
+    'MAXWIDE': 18           # Maximum number of wideband channels
 })
+
+# Add --prefix to conf_data object
+conf_data.set('PREFIX', get_option('prefix'))
 
 # Basic setup
 builddir = meson.project_build_root()
@@ -20,7 +23,7 @@ cc = meson.get_compiler('c')
 fs = import('fs')
 
 # Fortran compile flags
-comp_flags = ['-g', '-O', '-std=legacy', 
+comp_flags = ['-g', '-O0', '-std=legacy', 
               '-Wno-maybe-uninitialized','-Wno-conversion', '-Wno-array-bounds', '-Wno-surprising', '-Wno-tabs']
 add_project_arguments(comp_flags, language : ['fortran'])
 
@@ -37,15 +40,11 @@ pgplot_dep   = cc.find_library('pgplot', required : true)
 rpfits_proj = subproject('rpfits')
 rpfits_dep = rpfits_proj.get_variable('rpfits_dep')
 
-# Generate tools required for pre-compilation
-ratty_exe  = executable('ratty', 'tools/ratty.c')     # Preprocess .for files
-intf2c_exe = executable('intf2c', 'tools/intf2c.c')   # Preprocess .f2c files
-detab_exe  = executable('detab', 'tools/detab.c')     # Replaces tabs with spaces
-
 # Subdirectories and includes
-subdir('src')
 subdir('inc')         # Provides 'inc'
 subdir('inc/prog')    # Provides 'inc_prog'
+subdir('tools')       # Includes pre-processing tools ratty + intf2c
+subdir('src')
 
 # Generate LINPACK library from linpack fortran source codes
 linpack_lib = library('linpack', srclist_linpack, install: true)
@@ -71,3 +70,9 @@ foreach target : srclist_prog
                     )
     endif
 endforeach
+
+# Finally, setup shell scripts
+configure_file(input : 'MIRRC.sh.in',  output : 'MIRRC.sh', 
+               configuration : conf_data, install: true, install_dir: './')
+configure_file(input : 'MIRRC.csh.in', output : 'MIRRC.csh',  
+               configuration : conf_data, install: true, install_dir: './')
