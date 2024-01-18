@@ -1,3 +1,4 @@
+# Configure header files with compile-time variables
 srclist = fs.read('../prog.filelist').strip().split('\n')
 
 srclist_prog = []
