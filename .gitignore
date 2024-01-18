@@ -2,3 +2,4 @@
 subprojects/rpfits/darwin/
 subprojects/rpfits/linux64/
 subprojects/rpfits/build/
+html/doc/
