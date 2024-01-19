@@ -1,0 +1,8 @@
+maxdim.h.in
+maxdimc.h.in
+maxnax.h
+mem.h
+mirconst.h
+miriad.h
+tmpdim.h
+rpfits.inc

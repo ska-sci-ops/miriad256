@@ -1,6 +1,7 @@
-srclist = fs.read('../prog.hdrlist').strip().split('\n')
+srclist = fs.read('../subs.hdrlist').strip().split('\n')
 
-# Run configure on any .in files, otherwise copy over header files
+# Run configure on any .in files, otherwise copy over header
+# These are needed by the ratty preprocessor
 foreach src : srclist
     if src.endswith('.in')
         message('Configuring ' + src)
@@ -10,4 +11,4 @@ foreach src : srclist
     endif
 endforeach
 
-inc_prog = include_directories('.')
+inc_subs = include_directories('.')

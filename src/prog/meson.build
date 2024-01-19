@@ -9,7 +9,7 @@ foreach filename : srclist
         tgt = custom_target(filename, 
                     input : filename, 
                     output : filename.replace('.for', '.f'),
-                    command : [ratty_exe, '-s', 'linux', '-I', '../inc', '-I', '../inc/prog', '-I', 'inc', '@INPUT@', '@OUTPUT@'],
+                    command : [ratty_exe, '-s', 'linux'] + ratty_include_flags + ['@INPUT@', '@OUTPUT@'],
                     )
         srclist_prog += tgt
     elif filename.endswith('.f2c')

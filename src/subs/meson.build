@@ -5,12 +5,11 @@ message('Preprocessing src/subs')
 foreach filename : srclist
     progname = filename.split('.')[0]
     if filename.endswith('.for')
-        # Note: inc/maxdim.h is generated at compile time from maxdim.h.in
-        # So both -I ../inc (which has .h.in file) and -I inc (which has .h file) flags are needed
+        # Note: inc/maxdim.h is generated at compile time from maxdim.h.in, located in inc
         tgt = custom_target(filename, 
                     input : filename, 
                     output : filename.replace('.for', '.f'),
-                    command : [ratty_exe, '-s', 'linux', '-I', 'inc', '-I', '../inc', '-I', '@OUTDIR@', '@INPUT@', '@OUTPUT@'],                    )
+                    command : [ratty_exe, '-s', 'linux'] + ratty_include_flags + ['@INPUT@', '@OUTPUT@'],               )
         srclist_subs += tgt
     elif filename.endswith('.f2c')
         tgt = custom_target(filename, 

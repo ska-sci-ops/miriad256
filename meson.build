@@ -30,19 +30,27 @@ add_project_arguments(comp_flags, language : ['fortran'])
 # C compile flag (may be needed for MacOS/clang?)
 #add_project_arguments(['-std=c99'], language : ['c'])
 
-# Dependencies
-cfitsio_dep  = cc.find_library('cfitsio', required : true)
-wcslib_dep   = cc.find_library('wcs', required : true)
-readline_dep = cc.find_library('readline', required : true)
-pgplot_dep   = cc.find_library('pgplot', required : true)
-
 # Generate rpfits dependency from subdirectory
 rpfits_proj = subproject('rpfits')
 rpfits_dep = rpfits_proj.get_variable('rpfits_dep')
 
+# Dependencies
+miriad_deps =  [
+    cc.find_library('cfitsio', required : true), 
+    cc.find_library('wcs', required : true), 
+    cc.find_library('readline', required : true), 
+    cc.find_library('pgplot', required : true),
+    rpfits_dep
+]
+
+# Ratty preprocessor setup
+ratty_include_flags = ['-I', 'inc', '-I', 'inc/subs', '-I', 'inc/prog', '-I', 'inc/wcslib', '-I', '@OUTDIR']
+
 # Subdirectories and includes
 subdir('inc')         # Provides 'inc'
 subdir('inc/prog')    # Provides 'inc_prog'
+subdir('inc/subs')    # Provides 'inc_subs'
+subdir('inc/wcslib')  # Provides 'inc_wcs' (only needed by ratty preprocessor)
 subdir('tools')       # Includes pre-processing tools ratty + intf2c
 subdir('src')
 
@@ -51,9 +59,9 @@ linpack_lib = library('linpack', srclist_linpack, install: true)
 
 # Generate MIRIAD library 
 miriad_lib =  library('mir', srclist_subs,
-              include_directories: inc,
+              include_directories: [inc, inc_subs],
               link_with: linpack_lib,
-              dependencies: [wcslib_dep, cfitsio_dep, readline_dep, rpfits_dep, pgplot_dep],
+              dependencies: miriad_deps,
               install: true)
 
 # Generate the MIRIAD command-line applications
@@ -63,16 +71,15 @@ foreach target : srclist_prog
         prog_name = basename.split('.')[0]
         message('Adding program: ' + prog_name)
         executable(prog_name, target,
-                    include_directories: [inc, inc_prog],
+                    include_directories: [inc, inc_prog, inc_subs],
                     link_with: [miriad_lib, linpack_lib],
-                    dependencies: [wcslib_dep, cfitsio_dep, readline_dep, rpfits_dep, pgplot_dep],
+                    dependencies: miriad_deps,
                     install: true
                     )
     endif
 endforeach
 
-# Finally, setup shell scripts
-configure_file(input : 'MIRRC.sh.in',  output : 'MIRRC.sh', 
-               configuration : conf_data, install: true, install_dir: './')
-configure_file(input : 'MIRRC.csh.in', output : 'MIRRC.csh',  
-               configuration : conf_data, install: true, install_dir: './')
+# Copy over docs
+install_subdir('doc', install_dir: get_option('prefix'))
+install_subdir('cat', install_dir: get_option('prefix'))
+install_subdir('scripts', install_dir: get_option('prefix'))

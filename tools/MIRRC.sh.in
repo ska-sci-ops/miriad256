@@ -18,11 +18,13 @@
   MIRBIN=$MIR/bin   ; export MIRBIN
   MIRLIB=$MIR/lib   ; export MIRLIB
   MIRMAN=$MIR/man   ; export MIRMAN
+  MIRSCRIPTS=$MIR/scripts ; export MIRSCRIPTS
+
   [ -d $MIR/man ] && MIRMAN=$MIR/man ; export MIRMAN
 
 
 # Add MIRBIN to path so executables can be found on command line
-export PATH=$MIRBIN:$PATH
+export PATH=$MIRBIN:$MIRSCRIPTS:$PATH
 
 # Setup LD_LIBRARY_PATH for dynamic loading of shared objects
 export LD_LIBRARY_PATH=$MIRLIB:$LD_LIBRARY_PATH:$LIBRARY_PATH
@@ -55,6 +57,7 @@ export LD_LIBRARY_PATH=$MIRLIB:$LD_LIBRARY_PATH:$LIBRARY_PATH
 
 # Set DYLD_FALLBACK_LIBRARY_PATH as well on Darwin (Mac OS)
   if [ "$MIRARCH" = Darwin ]
+  then
     export DYLD_LIBRARY_PATH=$LD_LIBRARY_PATH
     export DYLD_FALLBACK_LIBRARY_PATH=$LD_LIBRARY_PATH
   fi
