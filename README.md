@@ -7,25 +7,43 @@ This version uses the [meson](https://mesonbuild.com/) build system, instead of 
 
 ### Installation (Mac)
 
-Use homebrew to install fortran, compile tools, and the PGPLOT replacement `giza`:
+Use homebrew to install gcc (clang does not play nice), compile tools, and the PGPLOT replacement `giza`:
 
 ```
-brew install pkgconfig cmake gfortran gcc-13 giza
+brew install pkgconfig cmake giza gcc@13
 ```
 
 Note the homebrew version of `wcslib` does not have fortran support.
 But we can get this from python/conda:
 
 ```
-conda install cfitsio readline wcslib meson
+conda install cfitsio readline wcslib meson gfortran
+```
+
+Or you can use the `environment.yml` file:
+
+```
+conda env create -f environment.yml
+conda activate mir256
 ```
 
 You'll then need to set some environment variables:
 
 ```
 export CC=gcc-13
-export CONDA_ENV_PATH=/Users/daniel.price/local/mamba/envs/aa3
-export LIBRARY_PATH=$MAMBA_ENV_PATH/lib 
+export LIBRARY_PATH=$CONDA_PREFIX/lib
+export PATH=$CONDA_PREFIX/bin
+```
+
+Where `$CONDA_PREFIX` is an environment variable set when you run `conda activate`.
+
+To install:
+
+```
+meson setup build --prefix=/path/to/install
+cd build
+meson compile
+meson install
 ```
 
 ### Installation (ubuntu 22.04)
