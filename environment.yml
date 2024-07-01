@@ -1,0 +1,11 @@
+name: mir256
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  # Base
+  - cfitsio 
+  - readline 
+  - wcslib 
+  - meson
+  - gfortran
