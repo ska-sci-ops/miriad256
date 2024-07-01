@@ -32,7 +32,7 @@ You'll then need to set some environment variables:
 ```
 export CC=gcc-13
 export LIBRARY_PATH=$CONDA_PREFIX/lib
-export PATH=$CONDA_PREFIX/bin
+export PATH=$CONDA_PREFIX/bin:$PATH
 ```
 
 Where `$CONDA_PREFIX` is an environment variable set when you run `conda activate`.
