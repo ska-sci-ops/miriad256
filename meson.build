@@ -1,4 +1,4 @@
-# MIRIAD: meson build script 
+# MIRIAD: meson build script
 # Project ID and versioning
 project('miriad', 'c', 'fortran', version: '2024.01.18')
 project_name = 'miriad'
@@ -23,12 +23,12 @@ cc = meson.get_compiler('c')
 fs = import('fs')
 
 # Fortran compile flags
-comp_flags = ['-g', '-O0', '-std=legacy', 
+comp_flags = ['-g', '-O0', '-std=legacy',
               '-Wno-maybe-uninitialized','-Wno-conversion', '-Wno-array-bounds', '-Wno-surprising', '-Wno-tabs']
 add_project_arguments(comp_flags, language : ['fortran'])
 
 # C compile flag (may be needed for MacOS/clang?)
-#add_project_arguments(['-std=c99'], language : ['c'])
+add_project_arguments(['-std=c99'], language : ['c'])
 
 # Generate rpfits dependency from subdirectory
 rpfits_proj = subproject('rpfits')
@@ -36,9 +36,9 @@ rpfits_dep = rpfits_proj.get_variable('rpfits_dep')
 
 # Dependencies
 miriad_deps =  [
-    cc.find_library('cfitsio', required : true), 
-    cc.find_library('wcs', required : true), 
-    cc.find_library('readline', required : true), 
+    cc.find_library('cfitsio', required : true),
+    cc.find_library('wcs', required : true),
+    cc.find_library('readline', required : true),
     cc.find_library('pgplot', required : true),
     rpfits_dep
 ]
@@ -57,10 +57,11 @@ subdir('src')
 # Generate LINPACK library from linpack fortran source codes
 linpack_lib = library('linpack', srclist_linpack, install: true)
 
-# Generate MIRIAD library 
+# Generate MIRIAD library
 miriad_lib =  library('mir', srclist_subs,
               include_directories: [inc, inc_subs],
               link_with: linpack_lib,
+              link_args: ['-Wl,-no_compact_unwind'],
               dependencies: miriad_deps,
               install: true)
 
@@ -73,6 +74,7 @@ foreach target : srclist_prog
         executable(prog_name, target,
                     include_directories: [inc, inc_prog, inc_subs],
                     link_with: [miriad_lib, linpack_lib],
+                    link_args: ['-Wl,-no_compact_unwind'],
                     dependencies: miriad_deps,
                     install: true
                     )
