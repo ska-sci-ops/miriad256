@@ -10,7 +10,7 @@ Usage:
   tpcp [-b blocksize] in out
 
 where "in" is the input, which may be either a disk file or a tape
-device. Similarly "out" may be either a file or a tape device. 
+device. Similarly "out" may be either a file or a tape device.
 
 If the input is a file and the output is a tape device, the "-b"
 flag should be used to set the block size of write operations.
@@ -36,7 +36,7 @@ Example:
 int idec();
 void usage();
 /************************************************************************/
-main(argc,argv)
+int main(argc,argv)
 int argc;
 char *argv[];
 {
@@ -103,5 +103,4 @@ char *s;
   l = 0;
   while(*s) l = 10*l + *s++ - '0';
   return l;
-}  
-
+}

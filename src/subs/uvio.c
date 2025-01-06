@@ -270,6 +270,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <ctype.h>
 #include "miriad.h"
 #include "io.h"
 #include "maxdimc.h"
@@ -3470,7 +3471,7 @@ private int uvread_select(UV *uv)
 	for (i=0; i<nants; i++) {
 	  if(op->loval <= dazim[i] && dazim[i] <= op->hival) {
 	    discard = op->discard;
-	  } 
+	  }
 	}
         op++; n++;
       }
@@ -3539,9 +3540,9 @@ endloop:
 /************************************************************************/
 private int uvread_match(char *s1,char *s2, int length)
 /*
-    This matches two (source) names in upper case. The first name may contain 
+    This matches two (source) names in upper case. The first name may contain
     wildcards (just asterisks, not the full blown UNIX regex). The second string
-    is not zero terminated. Used by select=source() 
+    is not zero terminated. Used by select=source()
 
   Input:
     s1		The first string. Can contain wildcards. Zero terminated.
@@ -3595,8 +3596,8 @@ private int uvread_matchp(char *s1,char *s2, int len2)
 
   /* could do a strpbrk on 'BFGPRSO', the current CARMA allowed ones    */
   /* i.e. if strpbrk(s1,"BFGPRSO") is NULL, BUG out ; but skip for now  */
-  
-  while(len2 > 0) {          
+
+  while(len2 > 0) {
     for (s=s1; *s; s++)    /* loop over s1 */
       if(toupper(*s) == toupper(*s2)) return 1; /* match */
     s2++;
@@ -3820,7 +3821,7 @@ private void uvread_init(int tno)
   if(uv->need_pol)   uv->need_pol= uv_locvar(tno,"pol") != NULL;
   if(uv->need_pol)   uv->pol     = uv_checkvar(tno,"pol",H_INT);
   if(uv->need_on)    uv->on      = uv_checkvar(tno,"on",H_INT);
-  if(uv->need_purp)  uv->purpose = (uv_locvar(tno,"purpose") ? 
+  if(uv->need_purp)  uv->purpose = (uv_locvar(tno,"purpose") ?
     uv_checkvar(tno,"purpose",H_BYTE) :  /* CARMA */
     uv_checkvar(tno,"calcode",H_BYTE));  /* ATCA */
   if(uv->need_src)   uv->source  = uv_checkvar(tno,"source",H_BYTE);
@@ -4873,7 +4874,7 @@ private void uvinfo_variancef(UV *uv,double *data)
 			    (uv_locvar(uv->tno,"nschan")  == NULL);
       /*
     } else if(line->linetype == LINE_VELOCITY){
-     
+
       uvvarset_c(uv->sigma2f.vhan,"systempf");
       uvvarset_c(uv->sigma2f.vhan,"restfreq");
       uv->sigma2f.missing |= (uv_locvar(uv->tno,"systempf") == NULL) |
@@ -4958,7 +4959,7 @@ private void uvinfo_variancef(UV *uv,double *data)
             }
             t1c+=line->step; t2c+=line->step;
             tab++;
-          }             
+          }
           t1+=nchan;
 	}
 	t2+=nchan;
