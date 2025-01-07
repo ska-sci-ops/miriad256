@@ -48,7 +48,7 @@ interface. Additionally within the routine, you use special notations
 when manipulating the dummy arguments.
 
 A routine declaration always starts with the word "fortran" followed
-by 
+by
   subroutine sub-name(type arg1, type arg2, ...)
 
 or
@@ -95,7 +95,7 @@ fortran subroutine fstrcpy(character out,character in)
   strcpy(out.addr,in.zterm);
   out.pad;
 }
-			
+
 									*/
 /*--									*/
 /*  History:								*/
@@ -496,7 +496,7 @@ char *argname;
     (*(sys_type->addr))(rout,argname);
     putchar(',');
     (*(sys_type->len))(rout,argname);
-    putchar(')');    
+    putchar(')');
   } else {
     fprintf(stderr,"Line %d: Do not understand %s.%s\n",lineno,argname,s);
     printf("%s.%s",argname,s);
@@ -645,7 +645,7 @@ char *buf;
     *s++ = 0;
   }
   return(buf);
-}    
+}
 /************************************************************************/
 char *Get_Word(buf)
 char *buf;
@@ -696,7 +696,7 @@ char *buf;
 	if(c != EOF) putchar(c);
       }
       more = TRUE;
-	
+
 /* Handle a cpp directive. */
 
     } else if(c == '#' && last_char == '\n'){
