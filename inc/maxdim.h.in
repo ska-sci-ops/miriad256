@@ -11,18 +11,18 @@ C     is about 260000000; unsuccessful links produce messages about
 C     truncated relocations, imom being the worst offender.
 C     The default value allocates 128MiB (for normal 4-byte INTEGERs).
       INTEGER   MAXBUF
-      PARAMETER(MAXBUF = 32*1024*1024)
+      PARAMETER(MAXBUF = @MAXBUF@)
 
 C     Maximum image axis length.  Array dimensions are typically a few
 C     times MAXDIM (never MAXDIM**2) so MAXDIM is associated with a much
 C     smaller allocation of static memory than MAXBUF.  Thus the default
-C     value of MAXDIM is quite generous. 
+C     value of MAXDIM is quite generous.
 C     The current value of MAXDIM is the largest value that keeps the
 C     memory allocation to store a single image plane below the current
 C     limit of 8GB. Note that invert is limited to 32768, the highest
 C     power of 2 below the limit.
       INTEGER   MAXDIM
-      PARAMETER(MAXDIM = 46340)
+      PARAMETER(MAXDIM = 32768)
 
 C     Maximum number of antennas (ATA=64).
       INTEGER   MAXANT

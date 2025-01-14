@@ -1,17 +1,20 @@
 # MIRIAD: meson build script
 # Project ID and versioning
-project('miriad', 'c', 'fortran', version: '2024.01.18')
+project('miriad', 'c', 'fortran',
+        version: '2025.01.10',
+        default_options: ['c_std=c99', 'fortran_std=legacy', 'warning_level=1', 'buildtype=debug'])
 project_name = 'miriad'
-version    = '2024.01.18'
+version    = '2025.01.10'
 so_version = '0'
 
 # Compile-time configuration
 conf_data = configuration_data({
-    'MAXANT': 256,          # Maximum number of antennas in array
-    'MAXCHAN': 4096,        # Maximum number of channels
-    'MAXAVER': 20000000,    # Maximum UV averaging
-    'MAXWIN': 48,           # Maximum number of windows in uv data
-    'MAXWIDE': 18           # Maximum number of wideband channels
+    'MAXBUF': 1024*1024*128,    # Default size of MIRIAD memory buffer
+    'MAXANT': 256,              # Maximum number of antennas in array
+    'MAXCHAN': 4096,            # Maximum number of channels
+    'MAXAVER': 20000000,        # Maximum UV averaging
+    'MAXWIN': 48,               # Maximum number of windows in uv data
+    'MAXWIDE': 18               # Maximum number of wideband channels
 })
 
 # Add --prefix to conf_data object
@@ -23,12 +26,11 @@ cc = meson.get_compiler('c')
 fs = import('fs')
 
 # Fortran compile flags
-comp_flags = ['-g', '-O0', '-std=legacy',
-              '-Wno-maybe-uninitialized','-Wno-conversion', '-Wno-array-bounds', '-Wno-surprising', '-Wno-tabs']
+comp_flags = ['-fno-automatic', '-w']
 add_project_arguments(comp_flags, language : ['fortran'])
 
 # C compile flag (may be needed for MacOS/clang?)
-add_project_arguments(['-std=c99'], language : ['c'])
+add_project_arguments(['-DDEBUG', '-Wno-deprecated-non-prototype', '-Wno-format', '-Wno-sometimes-uninitialized'], language : ['c'])
 
 # Generate rpfits dependency from subdirectory
 rpfits_proj = subproject('rpfits')
